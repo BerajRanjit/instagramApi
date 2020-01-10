@@ -12,16 +12,16 @@ router.route('/')
                 res.json(posts);
             }).catch(next);
     })
-    .post(auth.verifyUser, (req, res, next) => {
+    .post( (req, res, next) => {
         let post = new Post(req.body);
-        post.postBy = req.user._id;
-        post.authorPic = req.user.profilePicture;
+        post.postBy = req.body._id;
+        post.authorPic = req.body.profilePicture;
         post.save()
             .then((post) => {
                 res.statusCode = 201;
                 res.json(post);
             }).catch(next);
-    })
+    })  
     .put((req, res) => {
         res.statusCode = 405;
         res.json("Sorry! Cannot make an update");
